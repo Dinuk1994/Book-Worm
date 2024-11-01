@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { signin } from "../../api/auth/signin";
+import { checkAuth } from "../../api/auth/checkAuth";
 
 
 const initialState = {
@@ -30,6 +31,20 @@ const auth = createSlice({
             state.isAuthenticate = true
         })
         .addCase(signin.rejected, (state)=>{
+            state.isLoading = false
+            state.user = null
+            state.isAuthenticate = false
+        })
+        .addCase(checkAuth.pending, (state)=>{
+            state.isLoading = true
+        })
+        .addCase(checkAuth.fulfilled, (state,action)=>{
+            state.isLoading = false
+            state.user = action.payload.user  
+            console.log(action.payload);                
+            state.isAuthenticate = true
+        })
+        .addCase(checkAuth.rejected, (state)=>{
             state.isLoading = false
             state.user = null
             state.isAuthenticate = false

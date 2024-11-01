@@ -15,13 +15,19 @@ const Register = () => {
     email : "",
     password : ""
   })
+  const navigate = useNavigate();
 
   const handleSubmit = async(e)=>{
     e.preventDefault()
-    console.log(regData)
-    await dispatch(signin(regData))
+    //console.log(regData)
+    const success = await dispatch(signin(regData))
+
+    if(signin.fulfilled.match(success)){
+      navigate("/auth/login")
+    }
+
   }
-  const navigate = useNavigate();
+ 
   return (
     <div>
       <div className="p-8 mobile:p-2 mb-10">

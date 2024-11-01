@@ -21,7 +21,7 @@ export const signin = createAsyncThunk(
             return data;
 
         } catch (error) {
-            toast.error(`Sign-in failed: ${error.message}`);
+            toast.error(`Sign-in failed: ${error}`);
             return thunkAPI.rejectWithValue(error.message)
         }
     }
