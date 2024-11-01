@@ -6,7 +6,7 @@ const authRouter = express.Router();
 
 authRouter.post("/signin",signin)
 authRouter.post("/login",login)
-authRouter.get("/logout",logout)
+authRouter.post("/logout",logout)
 authRouter.get("/checkAuth",authMiddleware,(req,res)=>{
     const user = req.user
     return res.status(200).json({msg : "Authenticated",user})

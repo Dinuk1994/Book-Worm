@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { signin } from "../../api/auth/signin";
 import { checkAuth } from "../../api/auth/checkAuth";
 import { login } from "../../api/auth/login";
+import { logout } from "../../api/auth/logout";
 
 
 const initialState = {
@@ -61,6 +62,19 @@ const auth = createSlice({
             state.isLoading = false;
             state.user = null;
             state.isAuthenticate = false;
+        })
+        .addCase(logout.pending, (state) => {
+            state.isLoading = true;
+        })
+        .addCase(logout.fulfilled, (state) => {
+            state.user = null;
+            state.isAuthenticate = false;
+            state.isLoading = false;
+
+        })
+        .addCase(logout.rejected, (state) => {
+            state.isLoading = false;
+
         })
     }
 })
