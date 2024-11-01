@@ -1,6 +1,8 @@
+/* eslint-disable no-unused-vars */
 import { createSlice } from "@reduxjs/toolkit";
 import { signin } from "../../api/auth/signin";
 import { checkAuth } from "../../api/auth/checkAuth";
+import { login } from "../../api/auth/login";
 
 
 const initialState = {
@@ -21,9 +23,8 @@ const auth = createSlice({
     extraReducers : (builder)=>{
         builder
         .addCase(signin.pending, (state)=>{
-            state.isLoading = true,
-            state.user = null
-            state.isAuthenticate = false
+            state.isLoading = true
+
         })
         .addCase(signin.fulfilled, (state,action)=>{
             state.isLoading = false
@@ -35,19 +36,31 @@ const auth = createSlice({
             state.user = null
             state.isAuthenticate = false
         })
+        
+        .addCase(login.pending,(state)=>{
+            state.isLoading = true
+        })
+        .addCase(login.fulfilled,(state,action)=>{
+            state.isLoading = false
+            state.user = action.payload.user
+            state.isAuthenticate = true
+        })
+        .addCase(login.rejected,(state)=>{
+            state.isLoading = false
+            state.user = null
+        })
         .addCase(checkAuth.pending, (state)=>{
             state.isLoading = true
         })
-        .addCase(checkAuth.fulfilled, (state,action)=>{
-            state.isLoading = false
-            state.user = action.payload.user  
-            console.log(action.payload);                
-            state.isAuthenticate = true
+        .addCase(checkAuth.fulfilled, (state, action) => {
+            state.isLoading = false;
+            state.user = action.payload.user; 
+            state.isAuthenticate = true;
         })
-        .addCase(checkAuth.rejected, (state)=>{
-            state.isLoading = false
-            state.user = null
-            state.isAuthenticate = false
+        .addCase(checkAuth.rejected, (state, action) => {
+            state.isLoading = false;
+            state.user = null;
+            state.isAuthenticate = false;
         })
     }
 })

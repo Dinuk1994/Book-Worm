@@ -21,7 +21,7 @@ app.use(cors({
         "Expires",
         "Prigma"
     ],
-    credentials : true
+    credentials : true,
     
 }))
 
