@@ -3,7 +3,6 @@ import { Routes, Route, Navigate } from "react-router-dom"
 import Auth from "./layouts/authLayout/Auth"
 import Login from "./pages/auth/Login"
 import Register from "./pages/auth/Register"
-import AdminLayout from "./layouts/adminLayout/adminLayout"
 import Dashboard from "./pages/admin/Dashboard"
 import Books from "./pages/admin/Books"
 import HomeLAyout from "./layouts/landingLayout/HomeLAyout"
@@ -12,6 +11,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { useEffect } from "react"
 import { checkAuth } from "./api/auth/checkAuth"
 import { CheckAuth } from "./common/CheckAuth"
+import AdminLayout from "./layouts/adminLayout/AdminLayout"
 
 export default function App() {
     const { user, isAuthenticate, isLoading } = useSelector((state) => state.auth);

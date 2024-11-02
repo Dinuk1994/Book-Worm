@@ -4,6 +4,7 @@ import dotenv from "dotenv"
 import cookieParser from "cookie-parser"
 import authRouter from "./routes/auth.routes.js"
 import cors from "cors"
+import bookRouter from "./routes/book.routes.js"
 
 dotenv.config()
 
@@ -29,6 +30,7 @@ app.use(express.json())
 app.use(cookieParser())
 
 app.use("/api/auth",authRouter)
+app.use("/api/book",bookRouter)
 
 app.listen(PORT,()=>{
     connectToDB();

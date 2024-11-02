@@ -1,7 +1,10 @@
+import AddBookDrawer from "../../components/admin/AddBookDrawer"
 
 const Books = () => {
   return (
-    <div>Books</div>
+    <div>
+      <AddBookDrawer/>
+    </div>
   )
 }
 
