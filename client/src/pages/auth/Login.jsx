@@ -36,21 +36,21 @@ const Login = () => {
           <label className="text-white text-lg mobile:text-gray-800" htmlFor="">Enter Username</label>
           <label className="input mt-2 input-bordered flex items-center gap-2">
             <FaUser />
-            <input value={loginData.userName} onChange={(e)=>setLoginData({...loginData,userName:e.target.value})} type="text" className="grow" placeholder="Username" />
+            <input value={loginData.userName} onChange={(e)=>setLoginData({...loginData,userName:e.target.value})} type="text" className="grow border-none focus:ring-0" placeholder="Username" />
           </label>
         </div>
         <div>
           <label className="text-white text-lg mobile:text-gray-800" htmlFor="">Enter Email</label>
           <label value={loginData.email} onChange={(e)=>setLoginData({...loginData,email : e.target.value})} className="input mt-2 input-bordered flex items-center gap-2">
             <MdEmail />
-            <input type="text" className="grow" placeholder="Email" />
+            <input type="text" className="grow border-none focus:ring-0" placeholder="Email" />
           </label>
         </div>
         <div>
           <label className="text-white text-lg mobile:text-gray-800" htmlFor="">Enter Password</label>
           <label className="input mt-2 input-bordered flex items-center gap-2">
             <FaUnlockAlt />
-            <input value={loginData.password} onChange={(e)=>setLoginData({...loginData,password : e.target.value})} type="password" className="grow" placeholder="Password" />
+            <input value={loginData.password} onChange={(e)=>setLoginData({...loginData,password : e.target.value})} type="password" className="grow border-none focus:ring-0" placeholder="Password" />
           </label>
         </div>
 
