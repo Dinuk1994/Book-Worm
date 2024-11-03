@@ -6,10 +6,14 @@ import { UploadImage } from "./UploadImage"
 import { toast } from "react-toastify";
 import { Spinner } from "flowbite-react";
 import { updateBook } from "../../../../server/controller/book.controller";
+import { useDispatch } from "react-redux";
+import { addBook } from "../../api/book/addBook";
+
 const AddBookDrawer = ({ onPdfUpload }) => {
     const [images, setImages] = useState([]);
     const [loading, setLoading] = useState(false);
     const [pdfFile, setPdfFile] = useState(null);
+    const dispatch = useDispatch()
     const [bookData, setBookData] = useState({
         title: "",
         author: "",
@@ -21,64 +25,74 @@ const AddBookDrawer = ({ onPdfUpload }) => {
         pdfFile: null
     });
 
+
     const handleUpload = async () => {
         try {
-          
+
             const pdfData = new FormData();
             pdfData.append("file", pdfFile);
             pdfData.append("upload_preset", "Book-Worm-Pdf");
             pdfData.append("folder", "book_worm_pdfs");
-    
+
             const pdfResponse = await fetch("https://api.cloudinary.com/v1_1/doyd9gnzc/raw/upload", {
                 method: "POST",
                 body: pdfData
             });
             const pdfDataUrl = await pdfResponse.json();
             const pdfUrl = pdfDataUrl.url;
-    
+
             const imageData = new FormData();
             imageData.append("file", images[0]);
             imageData.append("upload_preset", "Book-Worm-Images");
             imageData.append("folder", "book_worm_images");
-    
+
             const imageResponse = await fetch("https://api.cloudinary.com/v1_1/doyd9gnzc/image/upload", {
                 method: "POST",
                 body: imageData
             });
             const imageDataUrl = await imageResponse.json();
             const imageUrl = imageDataUrl.url;
-    
+
             console.log("pdfUrl", pdfUrl);
             console.log("imageUrl", imageUrl);
-    
-            
+
+
             return { pdfFile: pdfUrl, coverImage: imageUrl };
         } catch (error) {
             toast.error(error.message);
             return null;
         }
     };
-    
+
     const handleSubmit = async (e) => {
         setLoading(true);
         e.preventDefault();
         const uploadData = await handleUpload();
-    
+
         if (uploadData) {
             const updatedBookData = { ...bookData, ...uploadData };
             setBookData(updatedBookData);
             console.log("updatedBookData", updatedBookData);
-    
-     
+            await dispatch(addBook(updatedBookData))
+            setBookData({
+                title: "",
+                author: "",
+                genre: "",
+                description: "",
+                publicationDate: "",
+                pages: "",
+                coverImage: [],
+                pdfFile: null
+            });
+            setImages([]); 
+            setPdfFile(null); 
+
         } else {
             console.log("Error occurred during file upload.");
         }
-    
+
         setLoading(false);
     };
-    
-
-
 
     return (
         <div>
@@ -123,14 +137,14 @@ const AddBookDrawer = ({ onPdfUpload }) => {
                                         <div className="grid">
                                             <label className="text-white text-lg ml-2 mobile:text-gray-800" htmlFor="">Select Genre</label>
                                             <select value={bookData?.genre} onChange={(e) => setBookData({ ...bookData, genre: e.target.value })} className="select mt-2 select-bordered w-full ">
-                                                <option disabled >Select category</option>
-                                                <option >Fiction</option>
-                                                <option>Non-Fiction</option>
-                                                <option>Children’s Literature</option>
-                                                <option>Poetry</option>
-                                                <option>Drama</option>
-                                                <option>Graphic Novels and Comics</option>
-                                                <option>Essays and Anthologies</option>
+                                                <option disabled value="">Select category</option>
+                                                <option value="Fiction">Fiction</option>
+                                                <option value="Non-Fiction">Non-Fiction</option>
+                                                <option value="Children’s Literature">Children’s Literature</option>
+                                                <option value="Poetry">Poetry</option>
+                                                <option value="Drama">Drama</option>
+                                                <option value="Graphic Novels and Comics">Graphic Novels and Comics</option>
+                                                <option value="Essays and Anthologies">Essays and Anthologies</option>
                                             </select>
                                         </div>
                                     </div>
