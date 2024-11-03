@@ -39,28 +39,28 @@ const Register = () => {
             <label className="text-white text-lg mobile:text-gray-800" htmlFor="">Enter Fullname</label>
             <label className="input mt-2 input-bordered flex items-center gap-2">
               <FaUser />
-              <input name="fullName" value={regData.fullName} onChange={(e)=>setRegData({...regData,fullName : e.target.value})} type="text" className="grow" placeholder="Fullname" />
+              <input name="fullName" value={regData.fullName} onChange={(e)=>setRegData({...regData,fullName : e.target.value})} type="text" className="grow border-none focus:ring-0" placeholder="Fullname" />
             </label>
           </div>
           <div>
             <label className="text-white text-lg mobile:text-gray-800" htmlFor="">Enter Username</label>
             <label className="input mt-2 input-bordered flex items-center gap-2">
               <FaUser />
-              <input name="userName" value={regData.userName} onChange={(e)=>setRegData({...regData,userName : e.target.value})} type="text" className="grow" placeholder="Username" />
+              <input name="userName" value={regData.userName} onChange={(e)=>setRegData({...regData,userName : e.target.value})} type="text" className="grow border-none focus:ring-0" placeholder="Username" />
             </label>
           </div>
           <div>
             <label className="text-white text-lg mobile:text-gray-800" htmlFor="">Enter Email</label>
             <label className="input mt-2 input-bordered flex items-center gap-2">
               <MdEmail />
-              <input name="email" value={regData.email} onChange={(e)=>setRegData({...regData,email : e.target.value})} type="text" className="grow" placeholder="Email" />
+              <input name="email" value={regData.email} onChange={(e)=>setRegData({...regData,email : e.target.value})} type="text" className="grow border-none focus:ring-0" placeholder="Email" />
             </label>
           </div>
           <div>
             <label className="text-white text-lg mobile:text-gray-800" htmlFor="">Enter Password</label>
             <label className="input mt-2 input-bordered flex items-center gap-2">
               <FaUnlockAlt />
-              <input name="password" value={regData.password} onChange={(e)=>setRegData({...regData,password : e.target.value})} type="password" className="grow" placeholder="Password" />
+              <input name="password" value={regData.password} onChange={(e)=>setRegData({...regData,password : e.target.value})} type="password" className="grow border-none focus:ring-0" placeholder="Password" />
             </label>
           </div>
 

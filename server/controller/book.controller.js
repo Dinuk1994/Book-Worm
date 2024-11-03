@@ -6,7 +6,6 @@ export const addBook = async (req, res) => {
         if (!title || !author || !genre || !description || !publicationDate || !pages || !coverImage || !pdfFile) {
             return res.status(400).json({ message: "Please fill in all fields." })
         }
-
         const book = new Book({
             title,
             author,

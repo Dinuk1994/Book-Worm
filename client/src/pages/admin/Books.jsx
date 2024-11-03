@@ -1,11 +1,15 @@
-import AddBookDrawer from "../../components/admin/AddBookDrawer"
+
+import AddBookDrawer from "../../components/admin/AddBookDrawer"; 
 
 const Books = () => {
-  return (
-    <div>
-      <AddBookDrawer/>
-    </div>
-  )
-}
 
-export default Books
+
+    return (
+        <div>
+            <AddBookDrawer  /> 
+        </div>
+    );
+        
+};
+
+export default Books;

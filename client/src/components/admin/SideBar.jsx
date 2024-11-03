@@ -16,12 +16,12 @@ const SideBar = () => {
             <div className="flex justify-center">
                 <div className="grid gap-y-6 mt-10 text-green-600 font-semibold">
                     <div onClick={() => navigate("/admin/dashboard")} className="btn btn-ghost flex gap-x-4 hover:bg-gray-500 justify-start items-center group">
-                        <AiOutlineDashboard className="text-3xl group-hover:text-yellow-300" />
-                        <label className="text-2xl group-hover:text-yellow-300" htmlFor="">Dashboard</label>
+                        <AiOutlineDashboard className="text-2xl group-hover:text-yellow-300" />
+                        <label className="text-xl group-hover:text-yellow-300" htmlFor="">Dashboard</label>
                     </div>
                     <div onClick={() => navigate("/admin/books")} className="btn btn-ghost flex gap-x-4 hover:bg-gray-500 justify-start items-center group">
-                        <MdManageHistory className="text-3xl group-hover:text-yellow-300" />
-                        <label className="text-2xl group-hover:text-yellow-300" htmlFor="">Manage</label>
+                        <MdManageHistory className="text-2xl group-hover:text-yellow-300" />
+                        <label className="text-xl group-hover:text-yellow-300" htmlFor="">Manage</label>
                     </div>
                 </div>
             </div>
