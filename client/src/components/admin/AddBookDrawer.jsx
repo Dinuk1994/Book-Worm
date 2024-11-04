@@ -100,11 +100,11 @@ const AddBookDrawer = ({ onPdfUpload }) => {
                 <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
                 <div className="drawer-content">
 
-                    <label htmlFor="my-drawer-4" className="btn btn-ghost bg-green-500 w-full shadow-lg shadow-gray-700  text-lg hover:bg-green-600 text-white">Add Book</label>
+                    <label htmlFor="my-drawer-4" className="btn btn-ghost bg-green-500 w-full shadow-lg shadow-gray-700  text-sm hover:bg-green-600 text-white">Add Book</label>
                 </div>
                 <div className="drawer-side">
                     <label htmlFor="my-drawer-4" aria-label="close sidebar" className="drawer-overlay"></label>
-                    <ul className="menu  text-base-content min-h-screen tablet:w-[800px] mobile:w-[450px]  w-[1200px] p-4 h-auto bg-gray-800 rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-40 border border-gray-100
+                    <ul className="menu relative z-auto text-base-content min-h-screen tablet:w-[800px] mobile:w-[450px]  w-[1200px] p-10 h-auto bg-gray-800 rounded-md bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-40 border border-gray-100
 ">
                         <div>
                             <div className="w-full">
@@ -188,7 +188,7 @@ const AddBookDrawer = ({ onPdfUpload }) => {
                             </div>
                         </div>
                         <div >
-                            <button onClick={handleSubmit} className="btn btn-ghost w-full bg-blue-500 ">
+                            <button onClick={handleSubmit} className="btn btn-ghost w-full text-white bg-blue-500 hover:bg-blue-600">
                                 <span className={`${loading ? 'loading loading-spinner' : ''}`}>Add Book</span>
                             </button>
                         </div>

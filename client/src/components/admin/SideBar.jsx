@@ -7,7 +7,7 @@ const SideBar = () => {
     const navigate = useNavigate();
 
     return (
-        <div className="flex flex-col h-full text-center">
+        <div className="flex flex-col h-screen text-center">
             <div className="h-6 bg-green-500"></div>
             <div className="flex pt-12 justify-center items-center text-blue-600">
                 <MdAdminPanelSettings className="text-5xl" />
