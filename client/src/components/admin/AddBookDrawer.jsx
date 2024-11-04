@@ -8,6 +8,8 @@ import { Spinner } from "flowbite-react";
 import { updateBook } from "../../../../server/controller/book.controller";
 import { useDispatch } from "react-redux";
 import { addBook } from "../../api/book/addBook";
+import { get } from "mongoose";
+import { getAllBooks } from "../../api/book/getAllBooks";
 
 const AddBookDrawer = ({ onPdfUpload }) => {
     const [images, setImages] = useState([]);
@@ -73,7 +75,9 @@ const AddBookDrawer = ({ onPdfUpload }) => {
             const updatedBookData = { ...bookData, ...uploadData };
             setBookData(updatedBookData);
             console.log("updatedBookData", updatedBookData);
-            await dispatch(addBook(updatedBookData))
+            await dispatch(addBook(updatedBookData)).then(()=>{
+                dispatch(getAllBooks())
+            })
             setBookData({
                 title: "",
                 author: "",

@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { addBook } from "../../api/book/addBook";
+import { getAllBooks } from "../../api/book/getAllBooks";
 
 const initialState = {
     books : {},
@@ -21,6 +22,16 @@ const bookSlice = createSlice({
             state.books = action.payload
         })
         .addCase(addBook.rejected,(state)=>{
+            state.isLoading = false
+        })
+        .addCase(getAllBooks.pending,(state)=>{
+            state.isLoading = true
+        })
+        .addCase(getAllBooks.fulfilled,(state,action)=>{
+            state.isLoading = false
+            state.books = action.payload
+        })
+        .addCase(getAllBooks.rejected,(state)=>{
             state.isLoading = false
         })
     }

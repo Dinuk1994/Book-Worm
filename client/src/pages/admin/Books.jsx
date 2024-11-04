@@ -1,44 +1,42 @@
 
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import AddBookDrawer from "../../components/admin/AddBookDrawer";
 import DisplayBookCard from "../../components/common/DisplayBookCard";
 import { useEffect } from "react";
+import { getAllBooks } from "../../api/book/getAllBooks";
 
 
 const Books = () => {
+    const dispatch = useDispatch()
 
     const user = useSelector((state) => state.auth.user)
+    const books  = useSelector((state) => state.book.books)
 
     useEffect(() => {
-    }, [user])
+        dispatch(getAllBooks())
+    }, [user,dispatch])
+
+    console.log(books.books);
+
+    
 
     return (
-        <div className=" pb-24">
+        <div className="">
             <div className="relative z-10">
                 <AddBookDrawer />
             </div>
-            <div className="grid p-10 grid-cols-4 gap-y-7  h-screen overflow-auto">
-                <div className="col-span-1 ">
-                    <DisplayBookCard user={user} />
-                </div>
-                <div className="col-span-1 ">
-                    <DisplayBookCard user={user} />
-                </div>
-                <div className="col-span-1 ">
-                    <DisplayBookCard user={user} />
-                </div>
-                <div className="col-span-1 ">
-                    <DisplayBookCard user={user} />
-                </div>
-                <div className="col-span-1 ">
-                    <DisplayBookCard user={user} />
-                </div>
-                <div className="col-span-1 ">
-                    <DisplayBookCard />
-                </div>  <div className="col-span-1 ">
-                    <DisplayBookCard user={user} />
-                </div>
-
+            <div className="grid p-10 grid-cols-4 mobile:grid-cols-2 gap-y-7 pb-48  h-screen overflow-auto">
+                
+                    {
+                        Array.isArray(books.books) && books.books.length > 0 ? (
+                            books.books.map((book ) => (
+                                <DisplayBookCard key={book._id} user={user} title={book.title} image={book.coverImage} author={book.author}/>
+                            ))
+                        ) : (
+                            <div>No Books Found</div>
+                        )
+                    }
+ 
             </div>
         </div>
     );
