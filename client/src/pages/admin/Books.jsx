@@ -30,7 +30,7 @@ const Books = () => {
                     {
                         Array.isArray(books.books) && books.books.length > 0 ? (
                             books.books.map((book ) => (
-                                <DisplayBookCard key={book._id} user={user} title={book.title} image={book.coverImage} author={book.author}/>
+                                <DisplayBookCard key={book._id} book={book} user={user}/>
                             ))
                         ) : (
                             <div>No Books Found</div>
