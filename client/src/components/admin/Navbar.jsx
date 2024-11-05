@@ -1,13 +1,14 @@
 import { FaUserCircle } from "react-icons/fa";
-import { useDispatch } from "react-redux"
-import { logout } from "../../api/auth/logout";
+
+import { useRef } from "react";
+import LogoutConfirmModal from "./modals/LogoutConfirmModal";
 
 
 const Navbar = () => {
-    const dispatch = useDispatch()
+    const logoutRef = useRef()
 
     const handleLogout = () => {
-        dispatch(logout())
+       logoutRef.current.showModal()
     }
 
     return (
@@ -37,6 +38,7 @@ const Navbar = () => {
                     </div>
                 </div>
             </div>
+            <LogoutConfirmModal logOutModal={logoutRef}/>
         </div>
     )
 }
