@@ -17,7 +17,7 @@ const UserNavbar = () => {
         <div className="flex col-span-4 mobile:hidden tablet:col-span-4 text-gray-400 items-center gap-x-6">
           <button className="btn btn-ghost hover:text-gray-100" htmlFor="">Home</button>
           <button className="btn btn-ghost hover:text-gray-100" htmlFor="">Bookmarks</button>
-          <button className="btn btn-ghost hover:text-gray-100" htmlFor="">Suggetions</button>
+          <button className="btn btn-ghost hover:text-gray-100" htmlFor="">Favorites</button>
           <button className="btn btn-ghost hover:text-gray-100" htmlFor="">{user?.userName}</button>
         </div>
         <div className="mobile:col-span-1 tablet:hidden  laptop:hidden desktop:hidden flex items-center">

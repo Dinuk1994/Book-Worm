@@ -15,13 +15,22 @@ const DetailBox = ({ detailModal, book }) => {
                             <div className="flex justify-center">
                                 <img className="w-48 mobile:w-36 mt-6 border-4 border-green-600 shadow-2xl shadow-black-600" src={book?.coverImage} alt="" />
                             </div>
+                            <div className="grid grid-cols-2 mt-4">
+                                <div className="col-span-1 flex justify-start ">
+                                    <label className="text-yellow-300 mobile:text-xs font-semibold" htmlFor="">{book?.publicationDate.toString().split("T")[0]}</label>
+                                </div>
+                                <div className="col-span-1 flex justify-end">
+                                    <label className="text-yellow-300 mobile:text-xs font-semibold" htmlFor="">{book?.pages} Pages</label>
+                                </div>
+
+                            </div>
                             <div className="mt-5">
                                 <label className="mobile:text-xs" htmlFor="">{book?.description}</label>
                             </div>
                         </div>
                     </div>
                     <div className="w-full mt-8">
-                        <button  onClick={() => window.open(book?.pdfFile, "_blank")} className="btn btn-ghost shadow-xl shadow-black w-full bg-green-400 hover:bg-green-500 text-white">
+                        <button onClick={() => window.open(book?.pdfFile, "_blank")} className="btn btn-ghost shadow-xl shadow-black w-full bg-green-400 hover:bg-green-500 text-white">
                             View Book
                         </button>
                     </div>
