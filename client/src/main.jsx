@@ -11,7 +11,7 @@ import 'react-toastify/dist/ReactToastify.css'
 createRoot(document.getElementById('root')).render(
   <BrowserRouter>
    <Provider store={store}>
-    <ToastContainer />
+    <ToastContainer position='bottom-right' />
       <App />
    </Provider>
   </BrowserRouter>,
