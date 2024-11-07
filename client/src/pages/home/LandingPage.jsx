@@ -1,22 +1,31 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable react/no-unescaped-entities */
 import { useDispatch, useSelector } from "react-redux";
 import { Banner } from "../../components/user/Banner";
 import { useEffect, useState } from "react";
 import { getAllBooks } from "../../api/book/getAllBooks";
 import DisplayBookCard from "../../components/common/DisplayBookCard";
+import { getFavorite } from "../../api/favorite/getFavorite";
 
-const LandingPage = () => {
+const LandingPage = ({user}) => {
   const dispatch = useDispatch();
   const [selectCategory, setSelectedCategory] = useState("All Categories");
   const [currentPage, setCurrentPage] = useState(1);
   const booksPerPage = 20;
 
   const books = useSelector((state) => state.book.books);
-  const user = useSelector((state) => state.auth.user);
 
   useEffect(() => {
-    dispatch(getAllBooks());
-  }, [dispatch]);
+    const initialLoads = async () => {
+      dispatch(getAllBooks());
+      console.log("landing" ,user);
+      
+      dispatch(getFavorite(user?._id));
+    }
+
+    initialLoads();
+    
+  }, [dispatch, user]);
 
   const handleSelectCategory = (e) => {
     e.preventDefault();

@@ -12,6 +12,7 @@ import { useEffect } from "react"
 import { checkAuth } from "./api/auth/checkAuth"
 import { CheckAuth } from "./common/CheckAuth"
 import AdminLayout from "./layouts/adminLayout/AdminLayout"
+import FavoritePage from "./pages/home/FavoritePage"
 
 export default function App() {
     const { user, isAuthenticate, isLoading } = useSelector((state) => state.auth);
@@ -49,7 +50,8 @@ export default function App() {
                 <Route path="/home" element={<CheckAuth isAuthenticate={isAuthenticate} user={user}>
                     <HomeLAyout />
                 </CheckAuth>} >
-                    <Route path="landing" element={<LandingPage />} />
+                    <Route path="landing" element={<LandingPage user={user} />} />
+                    <Route path="favorite" element={<FavoritePage user={user} />} />
                 </Route>
             </Routes>
         </div>

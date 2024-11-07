@@ -8,10 +8,10 @@ export const CheckAuth = ({isAuthenticate , user , children}) => {
         return <Navigate to="/auth/login" />
     }
 
-    if(isAuthenticate && (location.pathname.includes('/login') || location.pathname.includes('/register'))){
+    if(isAuthenticate && (location.pathname.includes('/login'))){
         if(user?.role === "admin"){
             return <Navigate to="/admin/dashboard" />
-        }else{
+        }else if(user?.role === "user"){
             return <Navigate to="/home/landing" />
         }
     }
