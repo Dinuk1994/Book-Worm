@@ -82,7 +82,7 @@ const DisplayBookCard = ({ user, book }) => {
         </div>
       </div>
 
-      <DetailBox detailModal={detailModalRef} book={book} />
+      <DetailBox detailModal={detailModalRef} book={book} user={user}/>
       <EditBook editModal={editmodalref} book={book} />
       <FavoriteConfirmModal confirmFavModal={favConfirmRef} book={book} user={user}/>
       <FavoriteReomoveModal removeFavModal={favRemoveRef} book={book} user={user} setIsFavorited={setIsFavorited}/>

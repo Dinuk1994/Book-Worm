@@ -1,6 +1,17 @@
 /* eslint-disable react/prop-types */
 
-const DetailBox = ({ detailModal, book }) => {
+import { useRef } from "react"
+import ReviewModal from "./ReviewModal"
+import ReviewViewBox from "../user/ReviewViewBox";
+
+const DetailBox = ({ detailModal, book, user }) => {
+    const reviewModalRef = useRef();
+
+    const openReviewModal = () => {
+        reviewModalRef.current.showModal()
+        detailModal.current.close()
+    }
+
     return (
         <div >
             <dialog ref={detailModal} id="my_modal_3" className="modal backdrop-blur-md">
@@ -15,8 +26,8 @@ const DetailBox = ({ detailModal, book }) => {
                             <div className="flex justify-center">
                                 <img className="w-48 mobile:w-36 mt-6 border-4 border-green-600 shadow-2xl shadow-black-600" src={book?.coverImage} alt="" />
                             </div>
-                            <div className="grid grid-cols-2 mt-4">
-                                <label className="text-yellow-300 mobile:text-xs font-semibold" htmlFor="">
+                            <div className="grid grid-cols-2 mt-4 j">
+                                <label className="text-yellow-300 mobile:text-xs font-semibold flex justify-start" htmlFor="">
                                     {book?.publicationDate ? book.publicationDate.toString().split("T")[0] : "Publication date not available"}
                                 </label>
 
@@ -35,8 +46,29 @@ const DetailBox = ({ detailModal, book }) => {
                             View Book
                         </button>
                     </div>
+                    <div className="w-full mt-8">
+                        <button onClick={openReviewModal} className="btn btn-ghost shadow-xl shadow-black w-full bg-yellow-400 hover:bg-yellow-500 text-white">
+                            Add a Review
+                        </button>
+                    </div>
+                    <div className="grid">
+                        <div className="mt-8">
+                            <hr className="border-2 border-gray-600" />
+                        </div>
+                        <div className="flex mt-2 justify-center">
+                            <label className="text-xl italic font-semibold" htmlFor="">Book Reviews</label>
+                        </div>
+                        <div className="mt-6 grid gap-y-6">
+                            <ReviewViewBox/>
+                            <ReviewViewBox/>
+                            <ReviewViewBox/>
+                            <ReviewViewBox/>
+                        </div>
+                    </div>
+
                 </div>
             </dialog>
+            <ReviewModal reviewModal={reviewModalRef} book={book} user={user} />
         </div>
     )
 }
