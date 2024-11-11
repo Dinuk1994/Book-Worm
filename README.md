@@ -19,6 +19,6 @@ In addition to the user features, the platform includes **administration functio
 - **Frontend**: React, Redux, Tailwind CSS
 - **Backend**: Node.js, Express.js
 - **Database**: MongoDB
-- **Image Storage**: Cloudinary
+- **Image/PDF Storage**: Cloudinary
 - **State Management**: Redux
 - **Authentication**: JSON Web Tokens (JWT)
