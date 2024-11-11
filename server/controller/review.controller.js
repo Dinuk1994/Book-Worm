@@ -55,8 +55,8 @@ export const getReviews = async (req, res) => {
         const {bookId} = req.params;
         const review = await Review.findOne({bookId}).populate("reviews.userId");
 
-        if (!review) {
-            return res.status(404).json({ message: "Review not found" });
+      if (!review) {
+            return res.status(200).json({ reviews: [] });
         }
 
         return res.status(200).json({ review });

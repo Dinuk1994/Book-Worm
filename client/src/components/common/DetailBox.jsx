@@ -1,16 +1,22 @@
 /* eslint-disable react/prop-types */
 
-import { useRef } from "react"
+import { useEffect, useRef } from "react"
 import ReviewModal from "./ReviewModal"
 import ReviewViewBox from "../user/ReviewViewBox";
 
-const DetailBox = ({ detailModal, book, user }) => {
+const DetailBox = ({ detailModal, book, user ,reviewForBook}) => {
     const reviewModalRef = useRef();
 
     const openReviewModal = () => {
         reviewModalRef.current.showModal()
-        detailModal.current.close()
+        //detailModal.current.close()
     }
+
+    useEffect(()=>{
+        console.log("reviewForBook",reviewForBook);
+        
+    },[ reviewForBook])
+
 
     return (
         <div >
@@ -36,16 +42,17 @@ const DetailBox = ({ detailModal, book, user }) => {
                                 </div>
 
                             </div>
-                            <div className="mt-5">
+                            <div className="w-full mt-8">
+                                <button onClick={() => window.open(book?.pdfFile, "_blank")} className="btn btn-ghost shadow-xl shadow-black w-full bg-green-400 hover:bg-green-500 text-white">
+                                    View Book
+                                </button>
+                            </div>
+                            <div className="mt-8">
                                 <label className="mobile:text-xs" htmlFor="">{book?.description}</label>
                             </div>
                         </div>
                     </div>
-                    <div className="w-full mt-8">
-                        <button onClick={() => window.open(book?.pdfFile, "_blank")} className="btn btn-ghost shadow-xl shadow-black w-full bg-green-400 hover:bg-green-500 text-white">
-                            View Book
-                        </button>
-                    </div>
+
                     <div className="w-full mt-8">
                         <button onClick={openReviewModal} className="btn btn-ghost shadow-xl shadow-black w-full bg-yellow-400 hover:bg-yellow-500 text-white">
                             Add a Review
@@ -59,10 +66,12 @@ const DetailBox = ({ detailModal, book, user }) => {
                             <label className="text-xl italic font-semibold" htmlFor="">Book Reviews</label>
                         </div>
                         <div className="mt-6 grid gap-y-6">
-                            <ReviewViewBox/>
-                            <ReviewViewBox/>
-                            <ReviewViewBox/>
-                            <ReviewViewBox/>
+                           {Array.isArray(reviewForBook) && reviewForBook.length > 0 ? (
+                               reviewForBook.map((review) => (
+                                   <ReviewViewBox key={review._id} review={review} />
+                               ))
+                           ) : ("No reviews for this book")}
+                          
                         </div>
                     </div>
 

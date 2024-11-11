@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { addReview } from "../../api/reviews/addReview";
+import { getAllReviews } from "../../api/reviews/getreviews";
 
 const initialState = {
     bookId : null,
@@ -24,6 +25,16 @@ const reviewSlice = createSlice({
             
         })
         .addCase(addReview.rejected,(state)=>{
+            state.isLoading = false
+        })
+        .addCase(getAllReviews.pending,(state)=>{
+            state.isLoading = true
+        })
+        .addCase(getAllReviews.fulfilled ,(state,action)=>{
+            state.isLoading = false
+            state.reviews = action.payload           
+        })
+        .addCase(getAllReviews.rejected,(state)=>{
             state.isLoading = false
         })
     }
