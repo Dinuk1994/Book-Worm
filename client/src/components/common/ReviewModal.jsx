@@ -1,7 +1,33 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { addReview } from "../../api/reviews/addReview";
+import { getAllReviews } from "../../api/reviews/getreviews";
+
 const ReviewModal = ({ reviewModal, book, user }) => {
+    const [message , setMessage] = useState()
+    const dispatch  = useDispatch();
+
+
+    const handleReviewData = (e)=>{
+        e.preventDefault();
+
+        const reviewData = {
+            bookId : book?._id,
+            reviews : [{
+                userId : user?._id || user?.userId,
+                message : message
+            }]
+        }
+        console.log(reviewData);  
+        dispatch(addReview({bookId : book?._id, reviewData : reviewData})).then(()=>{
+            dispatch(getAllReviews(book?._id));
+        });
+        reviewModal.current.close();    
+    }
+
     return (
         <div>
             <dialog ref={reviewModal} id="review_modal" className="modal backdrop-blur-md ">
@@ -23,6 +49,8 @@ const ReviewModal = ({ reviewModal, book, user }) => {
                         
                         <textarea 
                             id="review-text" 
+                            value={message}
+                            onChange={(e)=>setMessage(e.target.value)}
                             className="textarea textarea-bordered w-full h-32 p-4 rounded-lg bg-gray-800 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-400"
                             placeholder="Write your review here..."
                         ></textarea>
@@ -30,7 +58,7 @@ const ReviewModal = ({ reviewModal, book, user }) => {
 
                     <div className="flex justify-end mt-6">
                         <button 
-                            type="submit" 
+                            onClick={handleReviewData}
                             className="btn bg-blue-600 hover:bg-blue-700 mobile:text-sm text-white font-semibold py-2 px-6 rounded-lg shadow-md transition duration-300"
                         >
                             Submit Review
