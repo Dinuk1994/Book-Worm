@@ -9,6 +9,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { getFavorite } from "../../api/favorite/getFavorite";
 import FavoriteConfirmModal from "../user/modals/FavoriteConfirmModal";
 import FavoriteReomoveModal from "../user/modals/FavoriteReomoveModal";
+import { getAllReviews } from "../../api/reviews/getreviews"
+
 
 const DisplayBookCard = ({ user, book }) => {
 
@@ -18,23 +20,30 @@ const DisplayBookCard = ({ user, book }) => {
   const dispatch = useDispatch();
   const favConfirmRef = useRef()
   const favRemoveRef = useRef()
-
   const favorites = useSelector((state) => state.favorite.favorite);
+  const bookReviews = useSelector((state) => state.review.reviews);
 
-  const openDetailModal = () => {
+  const reviewForBook = bookReviews?.review?.reviews
+
+  const openDetailModal = async () => {
     if (user?.role === "admin") {
       editmodalref.current.showModal();
     } else {
-      detailModalRef.current.showModal();
+
+      if (book?._id) {
+        await dispatch(getAllReviews(book?._id));
+      }
+      
+        detailModalRef.current.showModal();
+     
     }
+  };
 
-  }
-
-  const openConfirmFavModal = ()=>{
+  const openConfirmFavModal = () => {
     favConfirmRef.current.showModal()
   }
 
-  const openRemoveFavModal = ()=>{
+  const openRemoveFavModal = () => {
     favRemoveRef.current.showModal()
   }
 
@@ -42,7 +51,7 @@ const DisplayBookCard = ({ user, book }) => {
     e.stopPropagation();
     if (!isFavorited) {
       openConfirmFavModal();
-    } else if( isFavorited) {
+    } else if (isFavorited) {
       openRemoveFavModal();
     }
   };
@@ -51,14 +60,23 @@ const DisplayBookCard = ({ user, book }) => {
     if (user?.userId) {
       dispatch(getFavorite(user.userId));
     }
-  }, [dispatch, user?.userId]);
+   
+
+  }, [dispatch, user?.userId, book?._id]);
 
   useEffect(() => {
     if (Array.isArray(favorites.favorite)) {
       setIsFavorited(favorites.favorite.some((fav) => fav.bookId._id === book._id));
     }
-  }, [favorites, book._id]);
-  
+
+  }, [favorites, book._id, dispatch]);
+
+  // useEffect(() => {
+  //   if (reviewForBook && reviewForBook.length > 0) {
+  //     console.log("bookReviews", reviewForBook);
+  //   }
+  // }, [reviewForBook]);
+
 
 
   return (
@@ -82,10 +100,10 @@ const DisplayBookCard = ({ user, book }) => {
         </div>
       </div>
 
-      <DetailBox detailModal={detailModalRef} book={book} />
+      <DetailBox detailModal={detailModalRef} book={book} user={user} reviewForBook={reviewForBook}/>
       <EditBook editModal={editmodalref} book={book} />
-      <FavoriteConfirmModal confirmFavModal={favConfirmRef} book={book} user={user}/>
-      <FavoriteReomoveModal removeFavModal={favRemoveRef} book={book} user={user} setIsFavorited={setIsFavorited}/>
+      <FavoriteConfirmModal confirmFavModal={favConfirmRef} book={book} user={user} />
+      <FavoriteReomoveModal removeFavModal={favRemoveRef} book={book} user={user} setIsFavorited={setIsFavorited} />
     </div>
   );
 };
