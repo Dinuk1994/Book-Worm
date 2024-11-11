@@ -1,4 +1,5 @@
 import {createAsyncThunk} from "@reduxjs/toolkit"
+import { toast } from "react-toastify";
 
 export const addReview = createAsyncThunk(
     "addReview" , async({bookId , reviewData}, thunkAPI)=>{
@@ -14,10 +15,11 @@ export const addReview = createAsyncThunk(
             if(!res.ok){
                 throw new Error(data.message)
             }
-
+            toast.success("Review Added Successfully!")
             return data;
             
         } catch (error) {
+            toast.error(error.message)
             return thunkAPI.rejectWithValue(error.message)
         }
     }
